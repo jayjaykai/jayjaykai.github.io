@@ -12,8 +12,8 @@
   <form>
   <div class="headtitle">個人簡介</div>
   <div class="void-br">
-    <span onmouseover="changeToAbout()" class="spantitle">關於我</span>
-    <span onmouseover="changeToExps()"  class="spantitle">學經歷</span>
+    <span id="spanabout" onmouseover="changeToAbout()" onmouseout="out()" class="spantitle">關於我</span>
+    <span id="spanexps" onmouseover="changeToExps()"  onmouseout="out()" class="spantitle">學經歷</span>
     <div id="about">
       <div class="aboutme">
         <img class="myimage" src="myimage.jpg">
@@ -178,19 +178,6 @@
     <br/><br/>
   </div>
   </form>
-    <script>
-        function changeToExps() {
-            let aboutDiv = document.querySelector("#about");
-            let expsDiv = document.querySelector("#exps");
-            aboutDiv.style.display = "none";
-            expsDiv.style.display = "block";
-        }
-        function changeToAbout() {
-            let aboutDiv = document.querySelector("#about");
-            let expsDiv = document.querySelector("#exps");
-            aboutDiv.style.display = "block";
-            expsDiv.style.display = "none";
-        }
-    </script>
+  <script src="myscript.js"></script>
 </body>
 </html>
