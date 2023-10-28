@@ -83,9 +83,9 @@ div{
   flex:auto;
   justify-content: flex-end;
 }
-.myimage {
+.myimage{
   width: 200px; 
-  height: auto; 
+  height: auto ;
   border: 2px solid #333;
   border-radius: 2px;
   float: right;
@@ -100,6 +100,10 @@ div{
 }
 .focus{
   color: red;
+  font-weight: bold;
+}
+.highlight{
+  color: blue;
   font-weight: bold;
 }
 .custom-image {
