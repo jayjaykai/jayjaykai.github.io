@@ -3,10 +3,10 @@ body {
     color: #333;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url('pic.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background-image: url('pic.jpg'); /* 替換 'your-image.jpg' 為您的圖片文件路徑或URL */
+    background-repeat: no-repeat; /* 防止圖片重複 */
+    background-size: cover; /* 自適應視窗大小 */
+    background-attachment: fixed; /* 固定背景圖片 */
 }
 form{
   width:900px;
@@ -58,8 +58,8 @@ div{
 .void-br {
   display: block;
   content: "";
-  background-color: seashell;
-  border: none;
+  background-color: seashell; /* 空白行的背景颜色 */
+  border: none; /* 去除边框 */
   margin-bottom: 50px;
 }
 .frame{
@@ -79,9 +79,8 @@ div{
   flex: none;
 }
 .duration{
-  display: flex;
   flex:auto;
-  justify-content: flex-end;
+  text-align: right;
 }
 .myimage{
   width: 200px; 
@@ -110,5 +109,5 @@ div{
   width: 300px; 
   height: auto; 
   
-  border: 1px solid #ccc;
+  border: 1px solid #ccc; /* 添加边框 */
 }
