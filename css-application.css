@@ -11,6 +11,8 @@ body {
 form{
   width:900px;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .maintitle {
     width:900px;
@@ -23,8 +25,6 @@ form{
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
 }   
 .headtitle {
     text-align: left;
