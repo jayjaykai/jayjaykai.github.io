@@ -25,6 +25,8 @@ form{
     display: flex;
     justify-content: center; 
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }   
 .headtitle {
     text-align: left;
