@@ -27,15 +27,26 @@ form{
     align-items: center;
 }   
 .headtitle {
-    text-align: left;
-    background-color: #333;
-    color: #fff;
-    font-size: 25px;
-    font-weight: bold;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}       
+  width:900px;
+  margin: 0 auto;
+  text-align: left;
+  background-color: #333;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}  
+.void-br {
+  width:900px;
+  margin: 0 auto;
+  display: block;
+  content: "";
+  background-color: seashell; 
+  border: none; 
+  margin-bottom: 30px;
+}
 .subtitle {
     text-align: left;
     background-color:darkslategrey;
@@ -66,13 +77,6 @@ div{
     color: #fff;
     text-decoration:underline;
     cursor: zoom-in;
-}
-.void-br {
-  display: block;
-  content: "";
-  background-color: seashell; 
-  border: none; 
-  margin-bottom: 30px;
 }
 .frame{
   display: flex;
@@ -126,3 +130,20 @@ div{
   
   border: 1px solid #ccc; 
 }
+@media (max-width:600px) {
+  .maintitle {
+      width: 90%;
+      margin: 0 auto;
+      justify-content: center; 
+      align-items: center;
+  }
+  .headtitle {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 20px;
+  }   
+  .void-br {
+    width: 90%;
+    margin: 0 auto;
+  }   
+}     
