@@ -125,10 +125,25 @@ div{
   color: blue;
   font-weight: bold;
 }
+.link{
+  background-color: rgb(4, 4, 163);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 3px 5px;
+}
+.linkproject{
+  background-color: rgb(224, 67, 20);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 3px 5px;
+}
 .custom-image {
   width: 300px; 
-  height: auto; 
-  
+  height: auto;  
   border: 1px solid #ccc; 
 }
 @media (max-width:600px) {
