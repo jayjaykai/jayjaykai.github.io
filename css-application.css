@@ -137,6 +137,7 @@ div{
   text-decoration: none;
   border-radius: 10px;
   padding: 1px 5px;
+  white-space: nowrap;
 }
 .linkproject{
   background-color: rgb(224, 67, 20);
@@ -145,6 +146,7 @@ div{
   text-decoration: none;
   border-radius: 10px;
   padding: 1px 5px;
+  white-space: nowrap;
 }
 .custom-image {
   width: 300px; 
