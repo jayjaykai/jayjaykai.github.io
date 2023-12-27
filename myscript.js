@@ -30,3 +30,22 @@ function out(){
   aboutSpan.style.fontSize = "20px";
   expsSpan.style.fontSize = "20px";
 }
+function zoomImage(event) {
+  var container = document.querySelector('.myimage-container');
+  var image = document.querySelector('.myimage');
+
+  var containerRect = container.getBoundingClientRect();
+  var offsetX = event.clientX - containerRect.left;
+  var offsetY = event.clientY - containerRect.top;
+
+  var percentX = offsetX / containerRect.width;
+  var percentY = offsetY / containerRect.height;
+
+  var scale = 2;
+
+  var transformValue = 'scale(' + scale + ') translate(' + (-percentX * containerRect.width) + 'px, ' + (-percentY * containerRect.height) + 'px)';
+  image.style.transform = transformValue;
+}
+function resetImage() {
+  document.querySelector('.myimage').style.transform = 'scale(1)';
+}
