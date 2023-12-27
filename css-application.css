@@ -107,14 +107,21 @@ div{
   flex:auto;
   text-align: right;
 }
-.myimage{
-  width: 200px; 
-  height: auto ;
-  border: 2px solid #333;
-  border-radius: 2px;
+.myimage-container {
+  position: relative;
+  overflow: hidden;
   float: right;
   margin-left: 5px;
   margin-right: 5px;
+}
+.myimage {
+  width: 200px;
+  height: auto;
+  border: 2px solid #333;
+  border-radius: 2px;
+  transition: transform 0.3s ease-out;
+  transform-origin: top left;
+  cursor: zoom-in;
 }
 .small-text {
   position:relative; 
