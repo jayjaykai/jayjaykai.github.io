@@ -1,7 +1,13 @@
 * {
   font-family: "Noto Sans TC", sans-serif;
 }
-
+@font-face{
+  font-family: 'myFont';
+  src: url(./JasonHandwriting1.ttf);
+}
+.myFontstyle{
+  font-family: 'myFont';
+}
 body {
     background-color: #f1f1f1;
     color: #333;
@@ -80,7 +86,6 @@ div{
     text-align:center;
     background-color: #333;
     color: #fff;
-    text-decoration:underline;
     cursor: zoom-in;
     transition: all 0.3s ease-in-out;
 }
