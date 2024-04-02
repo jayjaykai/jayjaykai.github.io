@@ -161,7 +161,6 @@ html {
         max-width: calc(100% / 3 - 1rem);
     }
     
-    /* 第二行的樣式 */
     .container:nth-child(n + 2):not(:nth-child(6)) {
         flex-grow: 1; /* 其他 container 的寬度相等 */
         max-width: calc(100% / 6 - 1rem); /* 其他 container 的最大寬度為父容器的 1/6 */
@@ -237,8 +236,8 @@ html {
         position: fixed;
         top: 0;
         right: 0;
-        width: 50%; /* 設置寬度為螢幕一半 */
-        height: 100%; /* 覆蓋整個螢幕 */
+        width: 50%; 
+        height: 100%; 
         background-color: white;
         padding: 20px;
         border: 1px solid #ccc;
