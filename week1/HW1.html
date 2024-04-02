@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+    <div class="titleblock">
+        <div class="leftblock">My Website</div>
+
+        <div class="rightblock">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+        </div>
+        <div class="mobile-menu" id="icon">
+            <img src="burger_icon.png" class="burger" onclick="toggleMenu()">
+        </div>
+        <div class="mobile-list" id="menu">
+            <div class="close-btn" onclick="toggleMenu()">X</div>
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+        </div>
+    </div>
+    <div class="maintitle">Welcome to MyHome</div>
+    <div class="list">
+        <div class="product">
+            <div class="content_image">
+                <img src="pic.jpg" alt="Product Image">
+            </div>
+            <div class="content_text">Promotion 1</div>
+        </div>
+        <div class="product">
+            <div class="content_image">
+                <img src="pic.jpg" alt="Product Image">
+            </div>
+            <div class="content_text">Promotion 2</div>
+        </div>
+        <div class="product">
+            <div class="content_image">
+                <img src="pic.jpg" alt="Product Image">
+            </div>
+            <div class="content_text">Promotion 3</div>
+        </div>
+    </div>
+    <div class="list_title">
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 1</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 2</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 3</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 4</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 5</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 6</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 7</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 8</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 9</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+        <div class="container">
+            <img class="pic-img" src="pic.jpg" alt="Product Image">
+            <div class="text">Title 10</div>
+            <img class="star-icon" src="star_icon.png" alt="star_icon">
+        </div>
+    </div>
+</body>
+<script>   
+    function toggleMenu() {
+    var menu = document.getElementById("menu");
+    var icon = document.getElementById("icon");
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+        icon.style.display = "none";
+    } else {
+        menu.style.display = "none";
+        icon.style.display = "block";
+    }
+    handleResize(); // 確保在切換菜單狀態時處理視窗大小
+    }
+
+    function handleResize() {
+        var menu = document.getElementById("menu");
+        var icon = document.getElementById("icon");
+        if (window.innerWidth > 600 && menu.style.display === "none") {
+            icon.style.display = "none";
+        } else if (window.innerWidth <= 600) {
+            icon.style.display = "block"; // 確保窗口小於等於 600 時顯示 icon
+        } else {
+            icon.style.display = "none"; // 在其他情況下隱藏圖標
+        }
+    }
+    
+    // 初始化時檢查視窗大小
+    handleResize();
+
+    // 綁定resize事件
+    window.addEventListener('resize', handleResize);
+</script>
+</html>
