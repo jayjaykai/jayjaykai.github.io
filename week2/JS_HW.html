@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment - Week 2</title>
+</head>
+<body>
+    <script>
+        function findAndPrint(messages, currentStation){
+        // your code here
+            const green_line_stations = [
+                "Songshan", "Nanjing", "Taipei Arena", "Nanjing Fuxing", "Songjiang Nanjing", "Zhongshan",
+                "Beimen", "Ximen", "Xiaonamen", "Chiang Kai-Shek Memorial Hall", "Guting", "Taipower Building",
+                "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"
+            ];
+            const lightgreen_line_station = ["Xiaobitan"];
+            const people_stations = {};
+            const people_index = {};
+
+            for (let person in messages) {
+                let message = messages[person];
+                for (const station of green_line_stations.concat(lightgreen_line_station)) {
+                    if(message.includes(station)){
+                        people_stations[person] = station;
+                        if (station === "Xiaobitan")
+                            people_index[person] = 16.5; // regards "Xiaobitan" as 16.5 according to "Qizhang" is 16
+                        else{
+                            people_index[person] = green_line_stations.indexOf(station);
+                            break;
+                        } 
+                    }
+                }
+            }
+
+            // For special handling about current_station =="Xiaobitan"
+            let current_index = currentStation === "Xiaobitan" ? 16.5 : green_line_stations.indexOf(currentStation);
+            // For specail handling 
+            if (currentStation === "Xindian City Hall") {
+                current_index += 1;
+            } 
+            else if (currentStation === "Xindian") {
+                current_index += 2;
+            }
+
+            let closest_person = [];
+            let min_value=green_line_stations.length;
+            for(let person in people_index){
+                let value = Math.abs(current_index-people_index[person])
+                if (value<min_value){
+                    min_value = value;
+                    closest_person = [person];
+                }
+                else if(min_value === value){
+                    closest_person.push(person);
+                }
+            }
+
+            if (closest_person.length > 1){
+                let people = closest_person.join(", ");
+                console.log(people);
+            }
+            else
+                console.log(closest_person[0]);
+                
+        }
+
+        const messages={
+            "Bob":"I'm at Ximen MRT station.",
+            "Mary":"I have a drink near Jingmei MRT station.",
+            "Copper":"I just saw a concert at Taipei Arena.",
+            "Leslie":"I'm at home near Xiaobitan station.",
+            "Vivian":"I'm at Xindian station waiting for you."
+        };
+        console.log("=== TASK 1 ===")
+        findAndPrint(messages, "Wanlong"); // print Mary
+        findAndPrint(messages, "Songshan"); // print Copper
+        findAndPrint(messages, "Qizhang"); // print Leslie
+        findAndPrint(messages, "Ximen"); // print Bob
+        findAndPrint(messages, "Xindian City Hall"); // print Vivian
+
+        let bookings = {};
+        function book(consultants, hour, duration, criteria){
+        // your code here
+            let final_consultant = null;
+            let final_value = null;
+            for(let consultant of consultants){
+                if(consultant.name in bookings){
+                    isbooked=false;
+                    for(let [start, end] of bookings[consultant.name]){
+                        if(!(hour+duration<=start || hour>end)){
+                            isbooked=true;
+                            break;
+                        }
+                    }
+                    if (isbooked)
+                        continue; // 如果已被預約，跳過此consultant
+                }
+
+                if(criteria==="price"){
+                    if(final_consultant === null || consultant.price<final_value){
+                        final_consultant = consultant;
+                        final_value = consultant.price;
+                    }
+                }
+                else{
+                    if(final_consultant === null || consultant.rate>final_value){
+                        final_consultant = consultant;
+                        final_value = consultant.rate;
+                    }
+                }
+            }
+
+            if(final_consultant!=null){
+                if(!(final_consultant.name in bookings)){
+                    bookings[final_consultant.name]=[];
+                }
+                bookings[final_consultant.name].push([hour, hour+duration])
+                console.log(final_consultant.name);
+            }
+            else
+                console.log("No Service");
+        }
+        const consultants=[
+            {"name":"John", "rate":4.5, "price":1000},
+            {"name":"Bob", "rate":3, "price":1200},
+            {"name":"Jenny", "rate":3.8, "price":800}
+        ];
+
+        console.log("=== TASK 2 ===")
+        book(consultants, 15, 1, "price"); // Jenny
+        book(consultants, 11, 2, "price"); // Jenny
+        book(consultants, 10, 2, "price"); // John
+        book(consultants, 20, 2, "rate"); // John
+        book(consultants, 11, 1, "rate"); // Bob
+        book(consultants, 11, 2, "rate"); // No Service
+        book(consultants, 14, 3, "price"); // John
+
+        function func(...data){
+        // your code here
+            let middle_names_count = {};
+            for(i=0; i<data.length; i++){
+                let name = data[i];
+                let middle_name = {};
+                if(name.length === 2)
+                    middle_name=name[name.length-1];
+                else if(name.length === 3 || name.length === 4)
+                    middle_name=name[name.length-2];
+                else if(name.length === 5)
+                    middle_name=name[name.length-3];
+                else
+                    continue;
+
+
+                if (middle_name in middle_names_count) 
+                    middle_names_count[middle_name] += 1;
+                else 
+                    middle_names_count[middle_name] = 1;    
+            }
+
+            let unique_middle_name = [];
+            for (let name in middle_names_count){
+                if(middle_names_count[name]===1)
+                    unique_middle_name.push(name);
+            }
+
+            if(unique_middle_name.length === 0){
+                console.log("沒有")
+                return;
+            }
+
+            // console.log(unique_middle_name);
+            for (let i = 0; i < data.length; i++) {
+                let name = data[i];
+                if (name.length === 2 && name[name.length - 1].includes(unique_middle_name)) {
+                    console.log(name);
+                    return;
+                } else if ((name.length === 3 || name.length === 4) && name[name.length - 2].includes(unique_middle_name)) {
+                    console.log(name);
+                    return;
+                } else if (name.length === 5 && name[name.length - 3].includes(unique_middle_name)) {
+                    console.log(name);
+                    return;
+                }
+            }   
+        }
+
+        console.log("=== TASK 3 ===")
+        func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
+        func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花
+        func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有
+        func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+
+        // rule: 4 4 -1 (7)
+        function getNumber(index){
+        // your code here
+            let root = Math.floor((index/3)) * 7;
+            loop_pos = index%3;
+            if(loop_pos === 1 )
+                console.log(root+4);
+            else if(loop_pos === 2 )
+                console.log(root+8);
+            else
+                console.log(root);
+        }
+        console.log("=== TASK 4 ===")
+        getNumber(1); // print 4
+        getNumber(5); // print 15
+        getNumber(10); // print 25
+        getNumber(30); // print 70
+    </script>
+</body>
+</html>

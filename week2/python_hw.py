@@ -16,40 +16,66 @@ def find_and_print(messages, current_station):
             if station in message:
                 people_stations[person] = station
                 if station == "Xiaobitan":
-                    people_index[person] = 16 # regards "Xiaobitan" as if they are at "Qizhang"
+                    people_index[person] = 16.5 # regards "Xiaobitan" as 16.5 according to "Qizhang" is 16
                 else:    
                     people_index[person] = green_line_stations.index(station)
                 break
 
     # print(people_stations)
     # print(people_index)
-    current_index = green_line_stations.index(current_station)
-    # For specail handling
-    if current_station == "Xindian City Hall" or "Xindian":
+
+    # For special handling about current_station =="Xiaobitan"
+    if current_station =="Xiaobitan":
+        current_index = 16.5
+    else:    
+        current_index = green_line_stations.index(current_station)
+    # For specail handling 
+    if current_station =="Xindian City Hall":
         current_index+=1
     elif current_station == "Xindian":
         current_index+=2
 
     # Find the closest person
-    closest_person = None
+    closest_person = []
    
+    # For only one person in a station
+    # min_value=len(green_line_stations)
+    # for person, index in people_index.items():
+    #     value = abs(current_index-index)
+    #     if value<min_value:
+    #         min_value = value
+    #         closest_person = person
+    # print(closest_person)
+
+    # closest_person = min(people_index, key=lambda person: abs(current_index - people_index[person]))
+    # print(closest_person)
+
+    # considering about not only one person in the same station
     min_value=len(green_line_stations)
     for person, index in people_index.items():
         value = abs(current_index-index)
-        if(value<min_value):
+        if value<min_value:
             min_value = value
-            closest_person = person
+            closest_person = [person]
+        elif value==min_value:
+            closest_person.append(person)
 
-    print(closest_person)
-    # closest_friend = min(people_index, key=lambda person: abs(current_index - people_index[person]))
+    if len(closest_person) > 1:
+        people = ", ".join(closest_person)
+        print(people)
+    else:
+        print(closest_person[0]) 
 
-# Test cases
+    # min_distance = min(abs(current_index - index) for index in people_index.values())
+    # closest_person = [person for person, index in people_index.items() if abs(current_index - index) == min_distance]
+
+
 messages = {
     "Leslie": "I'm at home near Xiaobitan station.",
     "Copper":"I just saw a concert at Taipei Arena.",
     "Bob": "I'm at Ximen MRT station.",
     "Mary": "I have a drink near Jingmei MRT station.",
-    "Vivian": "I'm at Xindian station waiting for you."
+    "Vivian": "I'm at Xindian station waiting for you.",
 }
 
 print("=== TASK 1 ===")
@@ -64,7 +90,7 @@ find_and_print(messages, "Xindian City Hall")  # Expected: Vivian
 bookings = {}
 
 def book(consultants, hour, duration, criteria):
-
+# your code here
     best_consultant = None
     best_value = None
 
@@ -82,7 +108,7 @@ def book(consultants, hour, duration, criteria):
         if criteria == "price":
             if best_consultant is None or consultant['price'] < best_value:
                 best_consultant = consultant
-                best_value = consultant[criteria]
+                best_value = consultant['price']
         else:
             if best_consultant is None or consultant['rate'] > best_value:
                 best_consultant = consultant
@@ -113,6 +139,7 @@ book(consultants, 14, 3, "price")  # John
 
 # Task 3
 def func(*data):
+    # your code here
     middle_names_count = {}
     for name in data:
         if len(name) == 2:
@@ -136,6 +163,10 @@ def func(*data):
         if count == 1:
             unique_middle_name.append(name)
 
+    if len(unique_middle_name)==0:
+        print("沒有")
+        return 
+
     # 找出具有獨一無二中間名的全名
     for name in data:
         if len(name) == 2:
@@ -149,8 +180,7 @@ def func(*data):
         elif len(name) == 5:
             if name[-3] in unique_middle_name:
                 print(name)
-                return
-    print("沒有")      
+                return 
 
 print("=== TASK 3 ===")
 func("彭大牆", "陳王明雅", "吳明") # print 彭大牆
