@@ -208,6 +208,32 @@
         getNumber(5); // print 15
         getNumber(10); // print 25
         getNumber(30); // print 70
+
+        function find(spaces, stat, n){
+        // your code here
+            let avail_space = [];
+            for (let i = 0; i < spaces.length; i++) {
+                avail_space.push(spaces[i] * stat[i]);
+            }
+            // console.log(avail_space);
+
+            let best_value = Math.max(...avail_space);
+            for (let i = 0; i < availSpace.length; i++) {
+                if (avail_space[i] >= n && avail_space[i] < best_value) {
+                    best_value = avail_space[i];
+                }
+            }
+
+            if (best_value === Math.max(...avail_space)) {
+                console.log(-1);
+            } else {
+                console.log(avail_space.indexOf(best_value));
+            }
+        }
+        console.log("=== TASK 5 ===")
+        find([3, 1, 5, 4, 3, 2], [0, 1, 0, 1, 1, 1], 2); // print 5
+        find([1, 0, 5, 1, 3], [0, 1, 0, 1, 1], 4); // print -1
+        find([4, 6, 5, 8], [0, 1, 1, 1], 4); // print 2
     </script>
 </body>
 </html>
