@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+    <div class="titleblock">
+        <div class="leftblock">My Website</div>
+
+        <div class="rightblock">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+        </div>
+        <div class="mobile-menu" id="icon">
+            <img src="burger_icon.png" class="burger" onclick="toggleMenu()">
+        </div>
+        <div class="mobile-list" id="menu">
+            <div class="close-btn" onclick="toggleMenu()">X</div>
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+        </div>
+    </div>
+    <div class="maintitle">Welcome to MyHome</div>
+    <div class="list" id="first_three_image"></div>
+    <div class="list_title" id="next_ten_items"></div>
+    <button class="loadmore" onclick="LoadMore()">Load More</button>
+</body>
+<script>   
+    var results={};
+    function getData() {
+        fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1").then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            // 已經得到資料，把資料呈現到畫面上
+            // console.log(data);
+            let spots = data.data.results;  // 取得results陣列
+            for (let i = 0; i < spots.length; i++) {
+                let stitle = spots[i].stitle; 
+                let filelist = spots[i].filelist.split('https');
+                let firstImageUrl = "https"+filelist[1];  // 取得第一張圖片的URL，檢查是否有至少兩個元素
+                results[stitle] = {
+                    title: stitle,
+                    firstImage: firstImageUrl
+                };  // 存儲標題和第一張圖片URL到results字典
+                console.log("Title:", stitle, "Image URL:", firstImageUrl);  // 印出標題和圖片URL
+            }
+            addContent();
+        });
+    }
+    getData();
+    function addContent() { 
+        var container = document.getElementById('first_three_image');
+        var count = 0; 
+
+        for (var key in results) {
+            if (count < 3) { 
+                var productDiv = document.createElement('div');
+                productDiv.className = 'product';
+
+                var img = document.createElement('img');
+                img.src = results[key].firstImage;
+                img.alt = results[key].title + " Image";
+                img.className = 'content_image';
+
+                var textDiv = document.createElement('div');
+                textDiv.className = 'content_text';
+                textDiv.textContent = results[key].title;
+
+                productDiv.appendChild(img);
+                productDiv.appendChild(textDiv);
+
+                container.appendChild(productDiv);
+                
+                count++;
+            } 
+            else{
+                container = document.getElementById('next_ten_items');
+                var startIndex = 3;
+                var endIndex = 13;
+
+                for (let i = startIndex; i < endIndex; i++) {
+                    let key = Object.keys(results)[i];
+                    let item = results[key];
+
+                    let itemContainer = document.createElement('div');
+                    itemContainer.className = 'container';
+
+                    let img = document.createElement('img');
+                    img.className = 'pic-img';
+                    img.src = item.firstImage;
+                    img.alt = "Product Image";
+
+                    let textDiv = document.createElement('div');
+                    textDiv.className = 'text';
+                    textDiv.textContent = item.title;
+
+                    let starIcon = document.createElement('img');
+                    starIcon.className = 'star-icon';
+                    starIcon.src = 'star_icon.png';
+                    starIcon.alt = 'star_icon';
+
+                    itemContainer.appendChild(img);
+                    itemContainer.appendChild(textDiv);
+                    itemContainer.appendChild(starIcon);
+
+                    container.appendChild(itemContainer);
+                }
+                break;
+            }
+        }
+    }
+
+    let LoadMoreStartIndex = 13;
+    function LoadMore() {
+        let container = document.getElementById('next_ten_items');
+        let endIndex = LoadMoreStartIndex + 10; 
+
+        for (let i = LoadMoreStartIndex; i < endIndex && i < Object.keys(results).length; i++) {
+            let key = Object.keys(results)[i];
+            let item = results[key];
+
+            let itemContainer = document.createElement('div');
+            itemContainer.className = 'container';
+
+            let img = document.createElement('img');
+            img.className = 'pic-img';
+            img.src = item.firstImage;
+            img.alt = item.title + " Image";
+
+            let textDiv = document.createElement('div');
+            textDiv.className = 'text';
+            textDiv.textContent = item.title;
+
+            let starIcon = document.createElement('img');
+            starIcon.className = 'star-icon';
+            starIcon.src = 'star_icon.png';
+            starIcon.alt = 'star_icon';
+
+            itemContainer.appendChild(img);
+            itemContainer.appendChild(textDiv);
+            itemContainer.appendChild(starIcon);
+
+            container.appendChild(itemContainer);
+        }
+
+        LoadMoreStartIndex += 10; 
+    }
+
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        var icon = document.getElementById("icon");
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+            icon.style.display = "none";
+        } else {
+            menu.style.display = "none";
+            icon.style.display = "block";
+        }
+        handleResize(); 
+    }
+
+    function handleResize() {
+        var menu = document.getElementById("menu");
+        var icon = document.getElementById("icon");
+        if (window.innerWidth > 600 && menu.style.display === "none") {
+            icon.style.display = "none";
+        } else if (window.innerWidth <= 600) {
+            icon.style.display = "block"; // 確保窗口小於等於 600 時顯示 icon
+        } else {
+            icon.style.display = "none"; // 在其他情況下隱藏圖標
+        }
+    }
+    // 初始化時檢查視窗大小
+    handleResize();
+
+    // 綁定resize事件
+    window.addEventListener('resize', handleResize);
+</script>
+</html>

@@ -1,0 +1,274 @@
+html, body {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.maintitle {
+    width: 100%;
+    margin: 0;
+    background-color: lightblue;
+    font-size: 2rem;
+    font-weight: bold;
+    height: 250px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}   
+
+.titleblock{
+    display: flex;
+    margin: 0.25rem 0;
+}
+
+.leftblock{
+    margin-left: 0.5rem;
+    text-align: left;
+    margin-right: auto;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.rightblock{
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.burger{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+.mobile-menu{
+    text-align: center;
+    display: none;
+}
+
+.mobile-list{
+    text-align: center;
+    display: none;
+}
+
+.item{
+    margin: 0 0.5rem;
+}
+
+.content_image{
+    width: 80px;
+    height: 50px;
+    background-image: url('pic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left center;
+}
+
+.product {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* width: 380px; */
+    margin-right: 1rem;
+}
+
+.list{
+    max-width: 1200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center; 
+}
+
+.list_title{
+    max-width: 1200px;
+    display: flex;
+    margin: 0 auto;
+    /* margin-left: 1rem; */
+    justify-content: center; 
+    /* align-items: center; */
+    flex-wrap: wrap;
+}
+
+.content_text{
+    flex: 1;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 50px;
+    background-color: lightblue;
+}
+
+.content_image {
+    width: 80px;
+    height: 50px;
+    background-image: url('pic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* margin-right: 10px; */
+    /* flex-shrink: 0; */
+    background-position: left center;
+}
+
+/* .content_image img {
+    max-width: 50%; 
+    max-height: 50%; 
+} */
+
+.container {
+    /* flex-grow: 1; */
+    margin: 0 auto;
+    margin-top: 1rem;
+    width: 100%;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.pic-img{
+    width: 100%; 
+    height: 100%; 
+    object-fit: fill;
+}
+
+.star-icon {
+    position: absolute; 
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.text {
+    position: absolute;
+    bottom: 0px; 
+    left: 50%; 
+    transform: translateX(-50%); /* 將文字左移自身寬度的一半，實現水平置中 */
+    background-color: rgba(0, 0, 0, 0.5); /* 透明度為0.5的黑色 */
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 0.25rem 0;
+    white-space: nowrap;  /* 保持文本在一行 */
+    overflow: hidden;     /* 隐藏超出部分 */
+    text-overflow: ellipsis; /* 使用省略号 */
+}
+.loadmore{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.loadmore:hover {
+    background-color: #00b3a7; /* 悬停时变暗 */
+}
+
+@media(max-width:1920px) and (min-width:1201px){
+    .container {
+        flex-grow: 1; /* 默认情况下，所有容器的flex-grow相等 */
+        max-width: calc(100% / 6 - 1rem); /* 默认情况下，所有容器的最大宽度为父容器的1/6 */
+    }
+
+    .container:nth-child(5n+1) {
+        flex-grow: 2;
+        max-width: calc(100% / 3 - 1rem); /* 第1、6、12...元素更宽 */
+    }
+}
+
+@media(max-width:1200px) and (min-width:601px){
+    /* 螢幕寬度介於600~1200px */
+    .list, .list_title{
+        flex-wrap: wrap;
+        margin-left: 1rem;
+    }
+    .text{
+        font-size: 0.75rem;
+    }
+    .product{
+        width: calc(50% - 20px);
+    }
+    .product:nth-child(3){
+        width: calc(100% - 20px);
+    }
+    /* others container */
+    .container:nth-child(n) {
+        flex-grow: 1; 
+        max-width: calc(100% / 4 - 1rem); 
+    }
+    
+    .container:nth-child(10n+9),
+    .container:nth-child(10n+10) {
+        flex-grow: 1;
+        max-width: calc(100% / 2 - 1rem); 
+    }
+    .mobile-menu{
+        text-align: center;
+        display: none;
+    }
+}
+
+@media(max-width:600px){
+    /* 螢幕寬度小於600px */
+    .list, .list_title{
+        flex-wrap: wrap;
+        margin-left: 1rem;
+    }
+    .leftblock{
+        font-size: 1rem;
+        transform: translateY(2px);
+    }
+    
+    .maintitle {
+        font-size: 1.5rem;
+    }
+    .product{
+        width: calc(100% - 20px);
+    }
+    .text{
+        font-size: 1rem;
+    }
+    .rightblock{
+        text-align: center;
+        display: none;
+    }
+    .mobile-menu{
+        text-align: center;
+        display: block;
+        cursor: pointer;
+    }
+    .mobile-list{
+        /* text-align: center;
+        display: none;
+        cursor: pointer; */
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%; /* 覆蓋整個螢幕 */
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        z-index: 9999;
+        box-sizing: border-box;
+    }
+    .close-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+    }
+    .item{
+        margin: 2rem 0.5rem;
+    }
+    .container {
+        flex-grow: 1; /* 每個 container 的寬度相等 */
+        max-width: calc(100% - 1rem); /* 每個 container 的最大寬度為父容器的 1/10 */
+    }
+}
