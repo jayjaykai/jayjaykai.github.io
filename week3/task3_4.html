@@ -44,12 +44,12 @@
             for (let i = 0; i < spots.length; i++) {
                 let stitle = spots[i].stitle; 
                 let filelist = spots[i].filelist.split('https');
-                let firstImageUrl = "https"+filelist[1];  // 取得第一張圖片的URL，檢查是否有至少兩個元素
+                let firstImageUrl = "https"+filelist[1];  // 取得第一張圖片的URL
                 results[stitle] = {
                     title: stitle,
                     firstImage: firstImageUrl
-                };  // 存儲標題和第一張圖片URL到results字典
-                console.log("Title:", stitle, "Image URL:", firstImageUrl);  // 印出標題和圖片URL
+                };  // 儲存標題和第一張圖片URL到results字典
+                console.log("Title:", stitle, "Image URL:", firstImageUrl);
             }
             addContent();
         });
