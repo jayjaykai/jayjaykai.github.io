@@ -61,7 +61,7 @@ html, body {
 .content_image{
     width: 80px;
     height: 50px;
-    background-image: url('pic.jpg');
+/*     background-image: url('pic.jpg'); */ 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left center;
