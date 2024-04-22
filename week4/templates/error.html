@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+失敗頁面
+{% endblock %}
+
+{% block content %}
+    <div class="top-title">
+        {% block title_message %}
+        失敗頁面
+        {% endblock %}
+    </div>
+    <div class="text_deco">
+        {% if message %}
+        <p>{{ message }}</p>
+        {% else %}
+        <p>Exception發生，請聯絡系統管理員</p>
+        {% endif %}
+    </div>
+{% endblock %}

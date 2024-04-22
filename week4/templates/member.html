@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+會員頁面
+{% endblock %}
+
+{% block content %}
+    <div class="top-title">
+        {% block title_message %}
+        歡迎光臨，這是會員頁
+        {% endblock %}
+    </div>
+    <div class="text_deco">
+        <div>恭喜您，成功登入系統</div>
+        <a href="/signout">登出系统</a>
+    </div>
+{% endblock %}

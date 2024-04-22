@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+計算結果頁面
+{% endblock %}
+
+{% block content %}
+    <div class="top-title">
+        {% block title_message %}
+        正整數平方計算結果
+        {% endblock %}
+    </div>
+    <div class="text_deco">
+        {% if square %}
+        <p>{{ square }}</p>
+        {% else %}
+        <p>Exception發生，請聯絡系統管理員</p>
+        {% endif %}
+    </div>
+{% endblock %}
