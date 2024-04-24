@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Church Institution Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Links to different pages -->
+        <a href="{{ url_for('home') }}" class="menu-item">Home</a>
+        <a href="{{ url_for('institution') }}" class="menu-item">一個屬於教會的機構</a>
+        <a href="{{ url_for('structure') }}" class="menu-item">理監事架構與職掌</a>
+        <a href="{{ url_for('administration') }}" class="menu-item">行政架構</a>
+        <a href="{{ url_for('scholarship') }}" class="menu-item">獎助學金條款</a>
+        <!-- Add more sidebar items here -->
+    </div>
+    <div class="main-content">
+        {% block content %}
+        <h1>Welcome to 新竹儲蓄互助社</h1>
+        {% endblock %}
+    </div>
+</body>
+</html>
