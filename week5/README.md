@@ -22,3 +22,13 @@
 ![alt text](image-8.png)
 "UPDATE data in name column to test2 where username equals to test." 
 ![alt text](image-9.png)
+
+"Task 4: SQL Aggregation Functions" 
+"SELECT how many rows from the member table." 
+![alt text](image-10.png)
+"SELECT the sum of follower_count of all the rows from the member table." 
+![alt text](image-11.png)
+"SELECT the average of follower_count of all the rows from the member table." 
+![alt text](image-12.png)
+"SELECT the average of follower_count of the first 2 rows, in descending order of follower_count, from the member table." 
+![alt text](image-13.png)
