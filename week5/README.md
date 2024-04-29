@@ -32,3 +32,15 @@
 ![alt text](image-12.png)
 "SELECT the average of follower_count of the first 2 rows, in descending order of follower_count, from the member table." 
 ![alt text](image-13.png)
+
+"Task 5: SQL JOIN" 
+"Create a new table named message, in the website database. designed as below:" 
+![alt text](image-14.png)
+"SELECT all messages, including sender names. We have to JOIN the member table to get that." 
+![alt text](image-15.png)
+"SELECT all messages, including sender names, where sender username equals to test. We have to JOIN the member table to filter and get that." 
+![alt text](image-16.png)
+"Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test." 
+![alt text](image-17.png)
+"Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username." 
+![alt text](image-18.png)
