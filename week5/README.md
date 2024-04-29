@@ -37,9 +37,9 @@
 "Create a new table named message, in the website database. designed as below:" 
 ![alt text](image-14.png)
 "SELECT all messages, including sender names. We have to JOIN the member table to get that." 
-![alt text](image-15.png)
+![alt text](image-19.png)
 "SELECT all messages, including sender names, where sender username equals to test. We have to JOIN the member table to filter and get that." 
-![alt text](image-16.png)
+![alt text](image-20.png)
 "Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test." 
 ![alt text](image-17.png)
 "Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username." 
