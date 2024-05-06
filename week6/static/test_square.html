@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Square Result</title>
+</head>
+<body>
+    <h1>Result</h1>
+    <p id="result">Calculating...</p>
+
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const square = params.get('value');
+            document.getElementById('result').innerText = `The square of the number is: ${square}`;
+        };
+    </script>
+</body>
+</html>
