@@ -53,7 +53,7 @@ async def signin(request: Request, username: str = Form(default=None), password:
         con.close()
          # if username == "test" and password == "test":
         if data:
-            print(data[0], data[1], data[2])
+            # print(data[0], data[1], data[2])
             request.session['id'] = data[0]
             request.session['name'] = data[1]
             request.session['username'] = data[2]
@@ -70,7 +70,7 @@ async def signin(request: Request, username: str = Form(default=None), password:
 async def read_member(request: Request):
     user = request.session.get('username')
     if not user:
-       return RedirectResponse(url="/")
+       return RedirectResponse(url="/")   
     
     con, cursor = connectMySQLserver()
     if cursor is not None:
@@ -111,17 +111,35 @@ async def createmsg(request: Request, message: str = Form(...)):
         return RedirectResponse(url=f'/error?message={error_message}', status_code=301)
 
 @app.post("/deleteMessage")
-async def delmsg(request: Request, member_id: int = Form(...), message_id: int = Form(...)):
+async def delmsg(request: Request, message_id: int = Form(...)):
     # 刪除前要先確認是不是使用者的帳號訊息
-    user_id = request.session.get('id')
-    if member_id!=user_id:
-        error_message = "無效的資料刪除操作"
+    con, cursor = connectMySQLserver()
+    if cursor is not None:
+         # 取得一筆資料
+        cursor.execute("select member_id from message where id = %s",(message_id,))
+        data=cursor.fetchone()
+        if data:
+           member_id=data[0]
+           # print(member_id) 
+           # 透過查詢message table中的member_id來比對確認身分
+           user_id = request.session.get('id')
+           if member_id!=user_id:
+              error_message = "無效的資料刪除操作"
+              return RedirectResponse(url=f'/error?message={error_message}', status_code=301)
+           con.close()
+        else:
+           error_message = "沒有此筆留言資料，無效的資料刪除操作"
+           con.close()
+           return RedirectResponse(url=f'/error?message={error_message}', status_code=301)
+    else:
+        error_message = "資料庫連線異常，請通知系統管理員"
         return RedirectResponse(url=f'/error?message={error_message}', status_code=301)
-    
+
+
     con, cursor = connectMySQLserver()
     if cursor is not None:
          # 刪除留言訊息
-        cursor.execute("delete from message WHERE id = %s AND member_id = %s", (message_id, user_id))
+        cursor.execute("delete from message WHERE id = %s AND member_id = %s", (message_id, member_id))
         con.commit()
         # 關閉資料庫連線
         con.close()
@@ -140,7 +158,7 @@ def connectMySQLserver():
             database="website"
         )
         if con.is_connected():
-            print("資料庫連線成功")
+            #print("資料庫連線成功")
             cursor = con.cursor()  
             return con, cursor
         else:
