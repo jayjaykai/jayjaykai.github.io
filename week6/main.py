@@ -139,7 +139,7 @@ async def delmsg(request: Request, message_id: int = Form(...)):
     con, cursor = connectMySQLserver()
     if cursor is not None:
          # 刪除留言訊息
-        cursor.execute("delete from message WHERE id = %s AND member_id = %s", (message_id, member_id))
+        cursor.execute("delete from message where id = %s", (message_id,))
         con.commit()
         # 關閉資料庫連線
         con.close()
