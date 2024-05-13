@@ -1,0 +1,109 @@
+* {
+    font-family: "Noto Sans TC", sans-serif;
+    margin: 0;
+    padding: 0;
+    /* border: 0; */
+}
+
+.top-title{
+    font-size: 40px;
+    font-weight: bolder;
+    display: flex;
+    background-color: #223344;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+.header {
+    margin: 20px 0;
+}
+
+.login-form,
+.member-form{
+    font-size:20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    text-align: center;
+    justify-content: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(30, 20, 112, 0.5);
+}
+
+.form-group {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="submitSQL"],
+.form-group input[type="submit"] {
+    /* width: 90%; */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.form-group input[type="submitSQL"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+    width: 50px;
+    height: 40px;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.checkbox {
+    text-align: left;
+}
+
+.text_deco{
+    font-size:20px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.message-item {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.message-content {
+     margin-right: 10px;
+}
+
+.delete-form {
+    margin-left: 10px;
+}
+
+.del-btn{
+    padding: 3px;
+    background-color: rgb(213, 103, 103);
+    cursor: pointer;
+}
