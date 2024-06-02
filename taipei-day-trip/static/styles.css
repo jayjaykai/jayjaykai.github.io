@@ -11,21 +11,48 @@ body {
     padding: 0;
 }
 
+html{
+    height: 100%;
+    overflow: auto;
+}
+
 .container {
     display: grid;
     grid-template-areas: 
-        "nav nav"
+        /* "nav nav" */
         "hero hero"
         "categories categories"
         "main main"
         "footer footer";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto 1fr auto;
-    height: 150vh;
+    padding-top: 55px;
+    min-height: 100vh;
+}
+
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+    padding: 10px 0;
 }
 
 .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* .nav {
     grid-area: nav;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
     background-color: #ffffff;
     padding: 10px 20px;
     display: grid;
@@ -34,10 +61,12 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-}
+    left: 50%;
+    transform: translateX(-50%);
+} */
 
 .header {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bolder;
     color: #008080;
 }
@@ -137,34 +166,57 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    /* background-color: #7a7871; */
     display: flex;
     justify-content: center;
-    padding: 10px;
+    overflow: hidden;
+    align-items: center; /* 确保项目和按钮垂直居中对齐 */
 }
 
 .left-arrow, .right-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 47px;
+    z-index: 1;
 }
-.left-arrow button, .right-arrow button{
+
+.left-arrow button, .right-arrow button {
     width: 32px;
     height: 32px;
     cursor: pointer;
     background-position: center;
     border-radius: 16px;
-    border: 1px solid gray
-}
-.left-arrow button:hover, .right-arrow button:hover {
-    background-color: white;
-    border: 1px solid black
+    border: 1px solid gray;
 }
 
-.left-arrow{
+.left-arrow button:hover, .right-arrow button:hover {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.left-arrow {
     padding: 9px 0px 9px 15px;
 }
-.right-arrow{
+
+.right-arrow {
     padding: 9px 15px 9px 0px;
 }
+
+.list-mrts {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 13px 10px;
+    white-space: nowrap;
+}
+
+.mrt-info {
+    padding: 10px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
 
 /* .content {
     flex-grow: 1;
@@ -172,18 +224,27 @@ body {
     padding: 0 10px;
 } */
 
-.list-bar .list-mrts {
+/* .list-bar .list-mrts {
     width: 100%;
     height: 50px;
     text-align: center;
     padding: 13px 10px;
     border: none
-}
+} */
 
-.list-bar a {
+/* .list-bar a {
     margin: 0 10px;
     text-decoration: none;
     color: #000;
+    pointer-events: auto;  
+} */
+
+.list-bar .mrt-info{
+    margin: 0 5px;
+    text-decoration: none;
+    color: #000;
+    pointer-events: auto;  /* 確保 <a> 元素能接收點擊事件 */
+    cursor: pointer;
 }
 
 .main {
@@ -191,7 +252,10 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 0 20px;
+    padding-bottom: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .List_spot {
@@ -202,18 +266,21 @@ body {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+    width: 100%;
+    height: 242px;
 }
 
 .image-container {
     position: relative;
     width: 100%;
     flex-grow: 1;
+    overflow: hidden;
 }
 
 .content_image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+    object-fit: cover;
 }
 
 .image-text {
@@ -221,14 +288,15 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
+    font-size: 1rem;
     text-align: left;
     padding: 0.5rem;
     white-space: nowrap; 
     overflow: hidden;     
     text-overflow: ellipsis;
-    font-weight: bold; /* Make text bold */
+    margin:0;
 }
 
 .image-info {
@@ -242,8 +310,9 @@ body {
 
 .footer {
     grid-area: footer;
-    background-color: #adb5bd;
+    background-color: #757575;
     padding: 20px;
+    color: #ffffff;
     text-align: center;
     font-size: 1em;
 }

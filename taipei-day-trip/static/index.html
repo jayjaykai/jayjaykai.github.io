@@ -8,13 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <nav class="nav">
-            <header class="header">台北一日遊</header>
-            <div>
-                <a href="#">預定行程</a>
-                <a href="#">登入/註冊</a>
-            </div>
-        </nav>
+        <div class="nav-container">
+            <nav class="nav">
+                <header class="header">台北一日遊</header>
+                <div>
+                    <a href="#">預定行程</a>
+                    <a href="#">登入/註冊</a>
+                </div>
+            </nav>
+        </div>
         <div class="hero">
             <div class="hero-text">
                 <div class="slogan">
@@ -22,141 +24,26 @@
                     <p class="subtitle">探索每個角落，體驗城市的深度旅遊行程</p>
                 </div>
                 <div class="search">
-                    <input type="text" placeholder="輸入景點名稱查詢">
-                    <button></button>
+                    <input type="text" id="mrtInput" placeholder="輸入景點名稱查詢">
+                    <button onclick="searchByMRT()"></button>
                 </div>
             </div>
         </div>
         <div class="list-bar">
             <div class="left-arrow">
-                <button>＜</button>
+                <button onclick="shiftLeft()">＜</button>
             </div>
-            <div class="list-mrts">
-                <a href="#">熱門</a>
-                <a href="#">山林</a>
-                <a href="#">新北市</a>
-                <a href="#">基隆市</a>
-                <a href="#">小門</a>
-                <a href="#">雙連</a>
-                <a href="#">信義區</a>
-                <a href="#">中山區</a>
-                <a href="#">民生社區</a>
-                <a href="#">中正紀念堂</a>
-                <a href="#">更多</a>
+            <div class="list-mrts" id="list-mrts">
+
             </div>
             <div class="right-arrow">
-                <button>＞</button>
+                <button onclick="shiftRight()">＞</button>
             </div>
         </div>
         <main class="main" id="spot_images">
         </main>
         <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
     </div>
+    <script src="/static/scripts.js" defer></script>
 </body>
-<script>
-    var results=[];
-    async function getData(){
-            let response = await fetch("http://127.0.0.1:8000/api/attractions",{
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json"
-                }
-            });
-            let result = await response.json();
-            // console.log(result);
-            let spots = result.data;  // 取得results陣列
-            // console.log(spots);
-            for (let i = 0; i < spots.length; i++) {           
-                results[i] = {
-                    stitle: spots[i].name,
-                    category: spots[i].category,
-                    mrt: spots[i].mrt,
-                    firstImage: spots[i].images[0]
-                };
-            }
-            console.log(results);
-            addContent();
-        }
-    getData();
-    function addContent() { 
-        var container = document.getElementById('spot_images');
-        for(let i=0; i<results.length; i++){
-            // console.log(results[i].stitle);
-            let itemContainer = document.createElement('div');
-            itemContainer.className = 'List_spot';
-
-            let imageContainer = document.createElement('div');
-            imageContainer.className = 'image-container';
-
-            let img = document.createElement('img');
-            img.className = 'content_image';
-            img.src = results[i].firstImage;
-            img.alt = results[i].stitle;
-
-            let textDiv = document.createElement('div');
-            textDiv.className = 'image-text';
-            textDiv.textContent = results[i].stitle;
-
-            imageContainer.appendChild(img);
-            imageContainer.appendChild(textDiv);
-
-            let infotextDiv = document.createElement('div');
-            infotextDiv.className = 'image-info';
-
-            let mrt = document.createElement('div');
-            mrt.className = 'mrt-name';
-            mrt.textContent = results[i].mrt;
-
-            let cat = document.createElement('div');
-            cat.className = 'category';
-            cat.textContent = results[i].category;
-
-            infotextDiv.appendChild(mrt);
-            infotextDiv.appendChild(cat);
-
-            // itemContainer.appendChild(img);
-            // itemContainer.appendChild(textDiv);
-            itemContainer.appendChild(imageContainer);
-            itemContainer.appendChild(infotextDiv);
-
-            container.appendChild(itemContainer);
-        }
-
-        // for (var key in results) {
-        //         container = document.getElementById('next_ten_items');
-        //         var startIndex = 3;
-        //         var endIndex = 13;
-
-        //         for (let i = startIndex; i < endIndex; i++) {
-        //             let key = Object.keys(results)[i];
-        //             // let item = results[key];
-
-        //             let itemContainer = document.createElement('div');
-        //             itemContainer.className = 'container';
-
-        //             let img = document.createElement('img');
-        //             img.className = 'pic-img';
-        //             img.src = results[key];
-        //             img.alt = "Product Image";
-
-        //             let textDiv = document.createElement('div');
-        //             textDiv.className = 'text';
-        //             textDiv.textContent = key;
-
-        //             let starIcon = document.createElement('img');
-        //             starIcon.className = 'star-icon';
-        //             starIcon.src = 'star_icon.png';
-        //             starIcon.alt = 'star_icon';
-
-        //             itemContainer.appendChild(img);
-        //             itemContainer.appendChild(textDiv);
-        //             itemContainer.appendChild(starIcon);
-
-        //             container.appendChild(itemContainer);
-        //         }
-            
-        // }
-    }
-
-</script>
 </html>
