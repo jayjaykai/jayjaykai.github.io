@@ -187,9 +187,31 @@ function shiftRight() {
     }
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     getData(currentPage);
     addMrtsList();
+
+    // 获取弹窗元素
+    const modal = document.getElementById('loginModal');
+    const loginButton = document.getElementById('loginButton');
+    const closeModal = document.getElementById('closeModal');
+
+    // 点击登入/注册按钮时显示弹窗
+    loginButton.onclick = function() {
+        modal.style.display = 'block';
+    }
+
+    // 点击关闭按钮时隐藏弹窗
+    closeModal.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // 点击窗口外部时隐藏弹窗
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
 
     window.addEventListener('scroll', () => {
         console.log('scrolling...');
@@ -203,4 +225,4 @@ function shiftRight() {
             getData(currentPage);
         }
     });
-// });
+});
