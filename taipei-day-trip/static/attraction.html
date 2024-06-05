@@ -4,8 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Attraction</title>
+  <link rel="stylesheet" href="/static/attraction_styles.css">
 </head>
 <body>
-  
+  <div class="container">
+    <div class="nav-container">
+        <nav class="nav">
+          <h2 class="header">
+            <a href="/static/index.html">台北一日遊</a>
+          </h2>
+          <div>
+              <button>預定行程</button>
+              <button id="loginButton">登入/註冊</button>
+          </div>
+        </nav>
+    </div>
+    <div class="content-wrapper">
+      <section class="spot-picture-container" id="spot-picture">
+        <button class="left-button" onclick="preImg()"></button>
+        <button class="right-button" onclick="nextImg()"></button>
+        <div class="img-wrapper" id="img-wrapper">         
+        </div>
+      </section>
+      <div class="profile">
+          <h3 class="profile-name" id="profile-name"></h3>
+          <div class="profile-cat" id="profile-category"></div>
+          
+          <!--訂購導覽行程-->
+          <div class="tour-booking">
+            <div>訂購導覽行程</div>
+            <div>以上此景點為中心的一日行程，帶您探索城市角落故事</div>
+            <label for="date">選擇日期：</label>
+            <input type="date" id="date" name="date">
+            <br>
+            <label>選擇時間：</label>
+            <input type="radio" id="morning" name="time" value="morning">
+            <label for="morning">上半天</label>
+            <input type="radio" id="afternoon" name="time" value="afternoon">
+            <label for="afternoon">下半天</label>
+            <br>
+            <div>導覽費用：新台幣 2000 元</div>
+            <button>開始預約行程</button>
+          </div>
+      </div>
+    </div>
+    <hr>
+    <div class="info" id="info">
+    </div>
+    <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
+  </div>
+  <script src="/static/attraction_scripts.js" defer></script>
 </body>
 </html>

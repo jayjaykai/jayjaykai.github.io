@@ -1,32 +1,54 @@
 let currentPage = 0;
 let isLoading = false;
 let currentIndex = 0;
+let currentKeyword = '';
 
-async function getData(page) {
-    console.log(page);
-    isLoading = true;
-    let response = await fetch(`http://3.27.243.249:8000/api/attractions?page=${page}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
+async function getData() {
+    let url;
+    // console.log(currentPage);
+    if(currentPage!= null){
+        isLoading = true;
+        if (currentKeyword) {
+            url = `http://54.79.121.157:8000/api/attractions?page=${currentPage}&keyword=${encodeURIComponent(currentKeyword)}`;
+        } else {
+            url = `http://54.79.121.157:8000/api/attractions?page=${currentPage}`;
         }
-    });
-    if (!response.ok) {
-        console.error('HTTP error', response.status);
+    
+        let response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if (!response.ok) {
+            console.error('HTTP error', response.status);
+            isLoading = false;
+            return;
+        }
+        let result = await response.json();
+        let spots = result.data;
+        currentPage = result.nextPage;
+        // console.log("currentPage: " + currentPage);
+        addContent(spots);
         isLoading = false;
-        return;
     }
-    let result = await response.json();
-    let spots = result.data;
-    addContent(spots);
-    isLoading = false;
+}
+
+function goToAttractionPage(element) {
+    const id = element.getAttribute('data-id');
+    window.location.href = `/attraction/${id}`;
 }
 
 function addContent(results) {
+    console.log(results);
     let container = document.getElementById('spot_images');
     for (let i = 0; i < results.length; i++) {
         let itemContainer = document.createElement('div');
         itemContainer.className = 'List_spot';
+
+        // 添加 onclick 事件到每一個景點圖片中，使用id來帶入資料
+        itemContainer.setAttribute('data-id', results[i].id);
+        itemContainer.setAttribute('onclick', 'goToAttractionPage(this)');
 
         let imageContainer = document.createElement('div');
         imageContainer.className = 'image-container';
@@ -65,7 +87,7 @@ function addContent(results) {
 }
 
 async function addMrtsList() {
-    let response = await fetch("http://3.27.243.249:8000/api/mrts", {
+    let response = await fetch("http://54.79.121.157:8000/api/mrts", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -98,7 +120,9 @@ async function addMrtsList() {
 }
 
 async function fetchAttractionsByKeyword(keyword) {
-    let response = await fetch(`http://3.27.243.249:8000/api/attractions?page=0&keyword=${encodeURIComponent(keyword)}`, {
+    currentPage = 0;
+    currentKeyword = keyword;
+    let response = await fetch(`http://54.79.121.157:8000/api/attractions?page=0&keyword=${encodeURIComponent(keyword)}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -106,7 +130,7 @@ async function fetchAttractionsByKeyword(keyword) {
     });
     let result = await response.json();
     let spots = result.data;
-    console.log(spots);
+    currentPage = result.nextPage;
     let container = document.getElementById('spot_images');
     container.innerHTML = "";
     addContent(spots);
@@ -121,92 +145,76 @@ function searchByMRT() {
     }
 }
 
-// function shiftLeft() {
-//     const items = document.getElementById('list-mrts');
-//     const itemCount = items.children.length;
-//     if (currentIndex > 0) {
-//         currentIndex--;
-//         updateScroll(items);
-//     }
-// }
-
-// function shiftRight() {
-//     const items = document.getElementById('list-mrts');
-//     const itemCount = items.children.length;
-//     const visibleItemsCount = Math.floor(items.parentElement.offsetWidth / items.children[0].offsetWidth);
-//     console.log("visibleItemsCount: "+ visibleItemsCount);
-//     console.log("CurrentIndex: " +currentIndex);
-//     console.log("ItemCount: " +itemCount);
-
-//     if (currentIndex < itemCount - visibleItemsCount) {
-//         currentIndex++;
-//         updateScroll(items);
-//     }
-// }
-
-// function updateScroll(items) {
-//     const itemCount = items.children.length;
-//     const visibleItemsCount = Math.floor(items.parentElement.offsetWidth / items.children[0].offsetWidth);
-//     const itemWidth = items.children[0].offsetWidth;
-//     items.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
-//     console.log(itemCount - visibleItemsCount + currentIndex);
-//     items.children[itemCount - visibleItemsCount].style.visibility = 'visible';
-//     items.children[itemCount - visibleItemsCount].style.display = 'inline-block';
-// }
+function getCssVariable(element, variable) {
+    return getComputedStyle(element).getPropertyValue(variable);
+}
 
 function shiftLeft() {
+    // const items = document.getElementById('list-mrts');
+    // const itemWidth = items.children[0].offsetWidth;
+    // if (currentIndex > 0) {
+    //     currentIndex--;
+    //     items.scrollBy({
+    //         left: -itemWidth,
+    //         behavior: 'smooth'
+    //     });
+    // }
     const items = document.getElementById('list-mrts');
-    const itemWidth = items.children[0].offsetWidth;
+    const scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
     if (currentIndex > 0) {
         currentIndex--;
         items.scrollBy({
-            left: -itemWidth,
+            left: -scrollWidth,
             behavior: 'smooth'
         });
     }
 }
 
 function shiftRight() {
-    const items = document.getElementById('list-mrts');
-    const itemCount = items.children.length;
-    const itemWidth = items.children[0].offsetWidth;
-    const visibleWidth = items.parentElement.offsetWidth;
-    const visibleItemsCount = Math.floor(visibleWidth / itemWidth)-5;
+    // const items = document.getElementById('list-mrts');
+    // const itemCount = items.children.length;
+    // const itemWidth = items.children[0].offsetWidth;
+    // const visibleWidth = items.parentElement.offsetWidth;
+    // const visibleItemsCount = Math.floor(visibleWidth / itemWidth);
 
-    // console.log("visibleWidth: "+ visibleWidth);
-    // console.log("itemWidth: "+ itemWidth);
-    // console.log("visibleItemsCount: "+ visibleItemsCount);
-    // console.log("ItemCount: " +itemCount);
-    // console.log("CurrentIndex: " +currentIndex);
-    if (currentIndex < itemCount - visibleItemsCount) {
-        currentIndex++;
-        items.scrollBy({
-            left: itemWidth,
-            behavior: 'smooth'
-        });
-    }
+    // console.log('currentIndex:', currentIndex);
+    // console.log('itemCount:', itemCount);
+    // console.log('visibleItemsCount:', visibleItemsCount);
+    // if (currentIndex < itemCount - visibleItemsCount) {
+    //     currentIndex++;
+    //     items.scrollBy({
+    //         left: itemWidth,
+    //         behavior: 'smooth'
+    //     });
+    // }
+    const items = document.getElementById('list-mrts');
+    const scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
+    currentIndex++;
+    items.scrollBy({
+        left: scrollWidth,
+        behavior: 'smooth'
+    });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    getData(currentPage);
+    getData();
     addMrtsList();
 
-    // 获取弹窗元素
+    // 登入彈跳視窗ID資訊
     const modal = document.getElementById('loginModal');
     const loginButton = document.getElementById('loginButton');
     const closeModal = document.getElementById('closeModal');
 
-    // 点击登入/注册按钮时显示弹窗
+    // 登入彈跳視窗顯示
     loginButton.onclick = function() {
         modal.style.display = 'block';
     }
 
-    // 点击关闭按钮时隐藏弹窗
+    // 關閉登入彈跳視窗
     closeModal.onclick = function() {
         modal.style.display = 'none';
     }
 
-    // 点击窗口外部时隐藏弹窗
+    // 點擊彈跳視窗外部
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = 'none';
@@ -214,15 +222,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', () => {
-        console.log('scrolling...');
-        console.log('window.innerHeight:', window.innerHeight);
-        console.log('window.scrollY:', Math.ceil(window.scrollY));
-        console.log('document.body.offsetHeight:', document.body.offsetHeight);
+        // console.log('scrolling...');
+        // console.log('window.innerHeight:', window.innerHeight);
+        // console.log('window.scrollY:', Math.ceil(window.scrollY));
+        // console.log('document.body.offsetHeight:', document.body.offsetHeight);
 
-        if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight && !isLoading) {
-            console.log('bottom reached');
-            currentPage++;
-            getData(currentPage);
+        // 判斷網頁到底部的寫法
+        // if ((window.innerHeight + Math.ceil(window.scrollY)) >= document.body.offsetHeight && !isLoading) {
+        //     console.log('bottom reached');
+        //     currentPage++;
+        //     getData(currentPage);
+        // }
+
+        // 檢查特定元素是否進入視窗底部
+        const element = document.getElementById('spot_images');
+        if (element) {
+            const rect = element.getBoundingClientRect();
+
+            if (rect.bottom <= window.innerHeight && !isLoading) {
+                // console.log('bottom reached');
+                // currentPage++;
+                getData();
+            }
         }
     });
-});
