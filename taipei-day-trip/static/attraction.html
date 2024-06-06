@@ -11,7 +11,7 @@
     <div class="nav-container">
         <nav class="nav">
           <h2 class="header">
-            <a href="/static/index.html">台北一日遊</a>
+            <a href="/">台北一日遊</a>
           </h2>
           <div>
               <button>預定行程</button>
@@ -29,21 +29,21 @@
       <div class="profile">
           <h3 class="profile-name" id="profile-name"></h3>
           <div class="profile-cat" id="profile-category"></div>
-          
-          <!--訂購導覽行程-->
           <div class="tour-booking">
             <div>訂購導覽行程</div>
-            <div>以上此景點為中心的一日行程，帶您探索城市角落故事</div>
-            <label for="date">選擇日期：</label>
-            <input type="date" id="date" name="date">
-            <br>
-            <label>選擇時間：</label>
-            <input type="radio" id="morning" name="time" value="morning">
-            <label for="morning">上半天</label>
-            <input type="radio" id="afternoon" name="time" value="afternoon">
-            <label for="afternoon">下半天</label>
-            <br>
-            <div>導覽費用：新台幣 2000 元</div>
+            <p>以上此景點為中心的一日行程，帶您探索城市角落故事</p>
+            <div class="form-group-day">
+                <label for="date">選擇日期：</label>
+                <input type="date" id="date" name="date" placeholder="yyyy/mm/dd">
+            </div>
+            <div class="form-group-time">
+              <label class="travel-time-label">選擇時間： </label>
+              <input type="radio" name="travel-time" id="morning" value="上半天" required>
+              <label for="morning" class="morning-label">上半天</label>
+              <input type="radio" name="travel-time" id="afternoon" value="下半天" required>
+              <label for="afternoon" class="afternoon-label">下半天</label>
+            </div>
+            <div>導覽費用：<span>新台幣 2000 元</span></div>
             <button>開始預約行程</button>
           </div>
       </div>
@@ -54,5 +54,6 @@
     <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
   </div>
   <script src="/static/attraction_scripts.js" defer></script>
+  <script src="/static/dialog_script.js" defer></script>
 </body>
 </html>

@@ -198,29 +198,7 @@ function shiftRight() {
 
     getData();
     addMrtsList();
-
-    // 登入彈跳視窗ID資訊
-    const modal = document.getElementById('loginModal');
-    const loginButton = document.getElementById('loginButton');
-    const closeModal = document.getElementById('closeModal');
-
-    // 登入彈跳視窗顯示
-    loginButton.onclick = function() {
-        modal.style.display = 'block';
-    }
-
-    // 關閉登入彈跳視窗
-    closeModal.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    // 點擊彈跳視窗外部
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-
+    
     window.addEventListener('scroll', () => {
         // console.log('scrolling...');
         // console.log('window.innerHeight:', window.innerHeight);

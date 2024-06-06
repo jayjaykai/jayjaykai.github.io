@@ -19,7 +19,7 @@ async function fetchAttractionDetails(id) {
     let result = await response.json();
     attraction = result;
 
-    // console.log(attraction);
+    console.log(attraction);
     // let spotPicDiv = document.getElementById('spot-image');
     // spotPicDiv.src = attraction.data.images[currentIndex];
     imageLen = attraction.data.images.length;
@@ -41,16 +41,32 @@ async function fetchAttractionDetails(id) {
     infoDescripDiv.className = 'info-description';
     infoDescripDiv.textContent = attraction.data.description;
 
-    let infoAddtDiv = document.createElement('div');
-    infoAddtDiv.className = 'info-address';
-    infoAddtDiv.innerHTML = "景點地址：<br>" + attraction.data.address;
+    let infoAddDiv = document.createElement('div');
+    let infoAddtTtileDiv = document.createElement('div');
+    infoAddtTtileDiv.className = 'info-address-title';
+    infoAddtTtileDiv.innerHTML = "景點地址：";
+    infoAddDiv.appendChild(infoAddtTtileDiv);
+    let infoAddContentDiv = document.createElement('div');
+    infoAddContentDiv.className = 'info-address';
+    infoAddContentDiv.innerHTML = attraction.data.address;
+
+    infoAddDiv.className = 'info-address-block';
+    infoAddDiv.appendChild(infoAddContentDiv);
 
     let infoTrans = document.createElement('div');
-    infoTrans.className = 'info-transport';
-    infoTrans.innerHTML = "交通方式：<br>" + attraction.data.transport;
+    let infoTransTtileDiv = document.createElement('div');
+    infoTransTtileDiv.className = 'info-transport-title';
+    infoTransTtileDiv.innerHTML = "交通方式：";
+    infoTrans.appendChild(infoTransTtileDiv);
+    let infoTransContentDiv = document.createElement('div');
+    infoTransContentDiv.className = 'info-transport';
+    infoTransContentDiv.innerHTML = attraction.data.transport;
+
+    infoTrans.className = 'info-transport-block';
+    infoTrans.appendChild(infoTransContentDiv);
 
     infoDiv.appendChild(infoDescripDiv);
-    infoDiv.appendChild(infoAddtDiv);
+    infoDiv.appendChild(infoAddDiv);
     infoDiv.appendChild(infoTrans);
 
 }
