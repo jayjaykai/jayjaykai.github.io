@@ -2,6 +2,7 @@ let currentIndex = 0;
 let imageLen = 0;
 let attraction;
 let imgWrapper = document.getElementById('img-wrapper');
+let dotsWrapper = document.getElementById('dots-wrapper');
 
 function getQueryParams() {
     const path = window.location.pathname;
@@ -29,6 +30,11 @@ async function fetchAttractionDetails(id) {
         img.src = attraction.data.images[i];
         imgWrapper.appendChild(img);
     }
+
+    // create dot
+    createDots(imageLen);
+    updateDots();
+
     // Profile
     let attractionName = document.getElementById('profile-name');
     let attractionDescription = document.getElementById('profile-category');
@@ -72,8 +78,12 @@ async function fetchAttractionDetails(id) {
 }
 
 function updatePosition() {
-    const offset = -currentIndex * 540;
+    let spotPicture = document.querySelector('.spot-picture');
+    let style = window.getComputedStyle(spotPicture);
+    let Width = parseInt(style.width);
+    let offset = -currentIndex * Width;
     imgWrapper.style.transform = `translateX(${offset}px)`;
+    updateDots();
 }
 
 function preImg() {
@@ -87,6 +97,26 @@ function nextImg() {
     if (currentIndex < imageLen - 1) {
         currentIndex++;
         updatePosition();
+    }
+}
+
+function createDots(num) {
+    console.log(num);
+    for (let i = 0; i < num; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dotsWrapper.appendChild(dot);
+    }
+}
+
+function updateDots() {
+    const dots = dotsWrapper.getElementsByClassName('dot');
+    for (let i = 0; i < dots.length; i++) {
+        if (i === currentIndex) {
+            dots[i].classList.add('active');
+        } else {
+            dots[i].classList.remove('active');
+        }
     }
 }
 

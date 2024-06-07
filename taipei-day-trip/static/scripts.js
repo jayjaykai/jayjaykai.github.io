@@ -39,6 +39,10 @@ function goToAttractionPage(element) {
     window.location.href = `/attraction/${id}`;
 }
 
+function bookEvent() {
+    window.location.href = `/booking`;
+}
+
 function addContent(results) {
     console.log(results);
     let container = document.getElementById('spot_images');
@@ -198,7 +202,7 @@ function shiftRight() {
 
     getData();
     addMrtsList();
-    
+
     window.addEventListener('scroll', () => {
         // console.log('scrolling...');
         // console.log('window.innerHeight:', window.innerHeight);
