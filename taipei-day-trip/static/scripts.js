@@ -44,7 +44,7 @@ function bookEvent() {
 }
 
 function addContent(results) {
-    console.log(results);
+    // console.log(results);
     let container = document.getElementById('spot_images');
     for (let i = 0; i < results.length; i++) {
         let itemContainer = document.createElement('div');
@@ -153,6 +153,7 @@ function getCssVariable(element, variable) {
     return getComputedStyle(element).getPropertyValue(variable);
 }
 
+// Left button
 function shiftLeft() {
     // const items = document.getElementById('list-mrts');
     // const itemWidth = items.children[0].offsetWidth;
@@ -163,8 +164,8 @@ function shiftLeft() {
     //         behavior: 'smooth'
     //     });
     // }
-    const items = document.getElementById('list-mrts');
-    const scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
+    let items = document.getElementById('list-mrts');
+    let scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
     if (currentIndex > 0) {
         currentIndex--;
         items.scrollBy({
@@ -174,6 +175,7 @@ function shiftLeft() {
     }
 }
 
+// Right button
 function shiftRight() {
     // const items = document.getElementById('list-mrts');
     // const itemCount = items.children.length;
@@ -191,8 +193,8 @@ function shiftRight() {
     //         behavior: 'smooth'
     //     });
     // }
-    const items = document.getElementById('list-mrts');
-    const scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
+    let items = document.getElementById('list-mrts');
+    let scrollWidth = parseInt(getCssVariable(document.documentElement, '--scroll-width'), 10);
     currentIndex++;
     items.scrollBy({
         left: scrollWidth,
@@ -217,13 +219,12 @@ function shiftRight() {
         // }
 
         // 檢查特定元素是否進入視窗底部
-        const element = document.getElementById('spot_images');
+        let element = document.getElementById('spot_images');
         if (element) {
-            const rect = element.getBoundingClientRect();
-
+            let rect = element.getBoundingClientRect();
+            // console.log('rect.bottom: ' + rect.bottom);
+            // console.log('window.innerHeight: ' + window.innerHeight);
             if (rect.bottom <= window.innerHeight && !isLoading) {
-                // console.log('bottom reached');
-                // currentPage++;
                 getData();
             }
         }

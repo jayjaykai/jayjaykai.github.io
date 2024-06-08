@@ -120,6 +120,10 @@ function updateDots() {
     }
 }
 
+function bookEvent() {
+    window.location.href = `/booking`;
+}
+
 // // use another method
 // function updateContent() {
 //     let spotPicDiv = document.getElementById('spot-image');
