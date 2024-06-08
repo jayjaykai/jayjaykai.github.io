@@ -1,14 +1,15 @@
 document.getElementById('loginButton').addEventListener('click', function() {
     // 檢查dialog是否存在，不存在使用fetch寫到body最後面
+    // 登入畫面
     if (!document.getElementById('loginModal')) {
-        fetch('/static/dialog.html')
+        fetch('/static/login.html')
             .then(response => response.text())
             .then(html => {
                 document.body.insertAdjacentHTML('beforeend', html);
 
                 let modal = document.getElementById('loginModal');
                 modal.showModal();
-                document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('closeLoginModal').addEventListener('click', function() {
                     modal.close();
                 });
 
@@ -18,8 +19,81 @@ document.getElementById('loginButton').addEventListener('click', function() {
                         modal.close();
                     }
                 });
+
+                 // 註冊對話框邏輯
+                 const showSignon = document.getElementById("showSignon");
+                 showSignon.addEventListener("click", (e) => {
+                     e.preventDefault();
+                     loginModal.close();
+                     if (!document.getElementById('signonModal')) {
+                         fetch('/static/signon.html')
+                             .then(response => response.text())
+                             .then(html => {
+                                 document.body.insertAdjacentHTML('beforeend', html);
+ 
+                                 let signonModal = document.getElementById('signonModal');
+                                 let signonContent = signonModal.querySelector('.modal-content');
+                                 signonContent.classList.add('signon');
+                                 signonModal.showModal();
+ 
+                                 document.getElementById('closeSignonModal').addEventListener('click', function() {
+                                     signonModal.close();
+                                 });
+ 
+                                 const showLogin = document.getElementById("showLogin");
+                                 showLogin.addEventListener("click", (e) => {
+                                     e.preventDefault();
+                                     signonModal.close();
+                                     loginModal.showModal();
+                                 });
+ 
+                                 // 點擊視窗外部關閉視窗
+                                 window.addEventListener('click', function(event) {
+                                     if (event.target == signonModal) {
+                                         signonModal.close();
+                                     }
+                                 });
+                             });
+                     } else {
+                        let signonModal = document.getElementById('signonModal');
+                        let signonContent = signonModal.querySelector('.modal-content');
+                        signonContent.classList.add('signon');
+                        signonModal.showModal();
+                     }
+                 });
             });
     } else {
         document.getElementById('loginModal').showModal();
     }
+    // // 註冊畫面
+    // if (!document.getElementById('signonModal')) {
+    //     fetch('/static/signon.html')
+    //         .then(response => response.text())
+    //         .then(html => {
+    //             document.body.insertAdjacentHTML('beforeend', html);
+    //             // 加入CSS改變高度
+    //             let signonModal = document.getElementById('signonModal');
+    //             signonModal.classList.add('signon');
+
+    //             // 加入監聽是否要關閉註冊視窗事件
+    //             document.getElementById('closeSignonModal').addEventListener('click', function() {
+    //                 document.getElementById('signonModal').close();
+    //             });  
+    //             // 加入監聽是否要切換到登入視窗事件
+    //             const showLogin = document.getElementById("showLogin");
+    //             showLogin.addEventListener("click", (e) => {
+    //                 e.preventDefault();
+    //                 document.getElementById('signonModal').close();
+    //                 document.getElementById('loginModal').showModal();
+    //             });
+
+    //             // 點擊視窗外部關閉視窗
+    //             window.addEventListener('click', function(event) {
+    //                 if (event.target == document.getElementById('signonModal')) {
+    //                     document.getElementById('signonModal').close();
+    //                 }
+    //             });
+    //     });
+        
+    // } 
 });

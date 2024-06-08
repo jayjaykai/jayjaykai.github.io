@@ -188,18 +188,68 @@ h2 {
 
 .tour-booking {
     background-color: #E8E8E8;
-    padding: 20px;
-    margin: 20px 0;
+    padding: 0 20px;
+    /* margin: 20px 0; */
     border-radius: 5px;
     max-width: 600px;
     width: 100%;
     height: 100%;
 }
 
+.tour-booking div {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.tour-booking p {
+    height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+    margin: 20px 0;
+}
+  
+.tour-booking label {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: left;
+}
+
+.tour-booking span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.tour-booking button {
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #448899;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.tour-booking button:hover {
+    background-color: #009090;
+} 
+
 .form-group-day {
-    display: inline-block;
-    vertical-align: middle;
-    max-height: 35px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
 }
 
 .form-group-day > input[type="date"] {
@@ -257,58 +307,6 @@ h2 {
     background-color: #448899; 
 }
 
-.tour-booking div {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 13.3px;
-    text-align: left;
-    /* margin-bottom: 20px; */
-    margin: 10px 0;
-}
-
-.tour-booking p {
-    height: 24px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 13.3px;
-    text-align: left;
-    margin-bottom: 20px;
-}
-  
-.tour-booking label {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 13.3px;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.tour-booking span {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 13.3px;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.tour-booking button {
-    font-size: 19px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: center;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #448899;
-    color: #FFFFFF;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.tour-booking button:hover {
-    background-color: #009090;
-} 
-
 .info{
     width: 100%;
     max-width: 1200px;
@@ -359,114 +357,6 @@ hr {
     border-top: 1px solid #ccc;
     margin: 20px auto;
     width: 100%;
-}
-
-.modal {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: transparent;
-    border: none;
-    margin: 0 auto;
-}
-
-.modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    max-width: 340px;
-    height: 275px;
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    /* border: 1px solid #888; */
-    width: 80%;
-    text-align: center;
-    box-shadow: none;
-    /* box-shadow: 0 4px 8px rgba(0,0,0,0.2); */
-    animation: fadeIn 0.5s; /* 淡入效果 */
-    position: relative;
-    margin-top: 80px;
-    border-radius: 10px ;
-}
-
-.modal-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 10px;
-    box-shadow: none; 
-    background-color: #008080; 
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #333;
-}
-
-.modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.modal-content button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: #008080;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.modal-content button:hover {
-    background-color: #009090;
-}
-
-.modal-content p {
-    font-size: 14px;
-}
-
-.modal-content p a {
-    color: #008080;
-}
-
-.modal-content p a:hover {
-    text-decoration: underline;
 }
 
 .dots-wrapper {
