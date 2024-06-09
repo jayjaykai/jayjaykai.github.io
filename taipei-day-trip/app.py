@@ -7,11 +7,30 @@ from mysql.connector import Error
 import os
 from dotenv import load_dotenv
 from mysql.connector.pooling import MySQLConnectionPool
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import hashlib
+secret_key="dfjewkjfejwfjiewfjoewjfioewjf"
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+# app.mount("/static", StaticFiles(directory="/home/ubuntu/tdt/static"), name="static")
 load_dotenv()
 # load_dotenv('/home/ubuntu/tdt/.env')
+# 設定可存取資源的來源端點
+origins = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # 允許所有HTTP方法
+    allow_headers=["*"],  # 允許所有HTTP headers
+)
+
 
 print("DB_HOST:", os.getenv("DB_HOST"))
 print("DB_USER:", os.getenv("DB_USER"))
@@ -30,6 +49,47 @@ pool = MySQLConnectionPool(
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
     pool_size=pool_size)
+
+# 自定義User資料 model
+class User(BaseModel):
+    email: str
+    password: str
+    
+def hash_password(text):
+    m = hashlib.sha256()
+    m.update((text+secret_key).encode())
+    return m.hexdigest()
+    
+@app.put("/api/user/auth")
+async def login(user: User):
+    con, cursor = connectMySQLserver()
+    if cursor is not None:
+        try:
+            print(user.email)
+            print(user.password)
+            print(hash_password(user.password))
+            cursor.execute("select name from User where email = %s and password = %s", (user.email, user.password))
+            data = cursor.fetchone()
+
+            if data:
+                print(f"User: {data[0]}")
+                return {"token": hash_password(user.password)}
+            else:
+                return JSONResponse(status_code=400, content={"error": True, "message": "登入失敗，帳號或密碼錯誤或其他原因"})
+        except mysql.connector.Error as err:
+            return JSONResponse(status_code=500, content={"error": True, "message": "伺服器內部錯誤"})
+        finally:
+            con.close()
+    else:
+        return JSONResponse(status_code=500, content={"error": True, "message": "伺服器內部錯誤"})
+
+@app.post("/api/user")
+async def signOn(user: User):
+    pass
+
+@app.get("/api/user/auth")
+async def checkUser(user: User):
+    pass
 
 #*** Static Pages (Never Modify Code in this Block) ***
 @app.get("/", include_in_schema=False)
@@ -62,6 +122,7 @@ def get_attractions(page: int = 0, keyword: Optional[str] = Query(None)):
             query += " LIMIT %s OFFSET %s"
             params.extend([12, offset])
             
+            print(query)
             cursor.execute(query, tuple(params))
             attractions = cursor.fetchall()
             
