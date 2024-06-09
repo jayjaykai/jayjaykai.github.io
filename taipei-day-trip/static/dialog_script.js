@@ -65,35 +65,42 @@ document.getElementById('loginButton').addEventListener('click', function() {
     } else {
         document.getElementById('loginModal').showModal();
     }
-    // // 註冊畫面
-    // if (!document.getElementById('signonModal')) {
-    //     fetch('/static/signon.html')
-    //         .then(response => response.text())
-    //         .then(html => {
-    //             document.body.insertAdjacentHTML('beforeend', html);
-    //             // 加入CSS改變高度
-    //             let signonModal = document.getElementById('signonModal');
-    //             signonModal.classList.add('signon');
-
-    //             // 加入監聽是否要關閉註冊視窗事件
-    //             document.getElementById('closeSignonModal').addEventListener('click', function() {
-    //                 document.getElementById('signonModal').close();
-    //             });  
-    //             // 加入監聽是否要切換到登入視窗事件
-    //             const showLogin = document.getElementById("showLogin");
-    //             showLogin.addEventListener("click", (e) => {
-    //                 e.preventDefault();
-    //                 document.getElementById('signonModal').close();
-    //                 document.getElementById('loginModal').showModal();
-    //             });
-
-    //             // 點擊視窗外部關閉視窗
-    //             window.addEventListener('click', function(event) {
-    //                 if (event.target == document.getElementById('signonModal')) {
-    //                     document.getElementById('signonModal').close();
-    //                 }
-    //             });
-    //     });
-        
-    // } 
 });
+
+async function login() { 
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        alert('請輸入電子信箱和密碼');
+        return;
+    }
+
+    let userIfo = {
+        email: email,
+        password: password
+    };
+
+    try {
+        let response = await fetch('http://127.0.0.1:8000/api/user/auth', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userIfo)
+        });
+        let result = await response.json();
+        if (!response.ok) {
+            console.error('HTTP error', response.status);
+            alert(result.message);
+            return;
+        }
+        let token = result.token;
+        console.log(token);
+        document.getElementById('loginModal').close();
+    } 
+    catch (error) {
+        console.error('Error:', error);
+        alert('伺服器內部錯誤，請聯絡系統管理員');
+    }
+}
