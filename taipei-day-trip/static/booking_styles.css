@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     height: 100%;
     overflow: auto;
 }
@@ -13,19 +13,17 @@ html{
 .container {
     display: grid;
     grid-template-areas: 
-        "travelInfo"
-        "hr1"
-        "personInfo"
-        "hr2"
-        "creditCardInfo"
-        "hr3"
-        "confirm"
-        "footer";
-    grid-template-columns: 1fr;
+        "travelInfo travelInfo"
+        "hr1 hr1"
+        "personInfo personInfo"
+        "hr2 hr2"
+        "creditCardInfo creditCardInfo"
+        "hr3 hr3"
+        "confirm confirm"
+        "footer footer";
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1px auto 1px auto 1px auto auto;
     padding-top: 55px;
-    /* min-height: 100vh; */
-    /* For login modal */
     position: relative;
     z-index: 0;
 }
@@ -37,6 +35,7 @@ html{
     background-color: #ffffff;
     z-index: 1000;
     padding: 10px 0;
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .nav {
@@ -59,15 +58,13 @@ h2 {
 }
 
 .nav div {
-    /* display: grid;
-    grid-template-columns: auto auto; */
     display: flex;
     justify-content: space-between;
     height: 34px;
     gap: 0px;
 }
 
-.nav button{
+.nav button {
     background-color: #FFFFFF;
     border: none;
     color: #666666;
@@ -79,44 +76,29 @@ h2 {
     cursor: pointer;
 }
 
-.travelInfo, .personInfo, .creditCardInfo, .confirm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    color: #666666;
-}
-
-.travelInfo{
+.travelInfo {
     grid-area: travelInfo;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 1000px;
+    height: auto;
     font-size: 19px;
     font-weight: 700;
     line-height: 16px;
     text-align: left;
     justify-content: left;
     margin: 20px auto;
-    top: 94px;
-    left: 460px;
     padding: 2px 10px 1px 10px;
 }
 
-.titleInfo{
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 16px;
-    text-align: left;
+.hello {
+    margin-top: 20px;
 }
 
-.noReservation{
+.noReservation {
     width: 1000px;
-    top: 151px;
-    left: 460px;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 10px;
     gap: 0px;
     justify-content: left;
     font-size: 16px;
@@ -127,26 +109,69 @@ h2 {
     display: none;
 }
 
-.travel-dedails{
-    display: flex;
-    flex-direction: row;
+.travel-dedails {
+    position: relative;
+    display: grid;
+    grid-template-areas: "img info";
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
     margin: 20px 0;
 }
 
-.img{
+.img {
+    grid-area: img;
     max-width: 250px;
     max-height: 200px;
     object-fit: cover;
 }
 
 .info {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
+    width: 700px;
+}
 
-.personInfo{
+.info > div {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: left;
+    color: #666666;
+}
+
+.info .info-topic {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: left;
+    color: #448899;
+}
+
+.personInfo .titleInfo, .creditCardInfo .titleInfo {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: left;
+}
+
+.personInfo .highlight {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: left;
+}
+
+.personInfo > div {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+}
+
+.personInfo {
     grid-area: personInfo;
     display: flex;
     flex-direction: column;
@@ -156,7 +181,19 @@ h2 {
     gap: 20px;
 }
 
-.creditCardInfo{
+.delete-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0; 
+    right: 0;
+    cursor: pointer;
+    border: none;
+    background: url("delete.png") no-repeat center center;
+    background-size: cover;
+}
+
+.creditCardInfo {
     grid-area: creditCardInfo;
     display: flex;
     flex-direction: column;
@@ -166,7 +203,14 @@ h2 {
     gap: 20px;
 }
 
-.confirm{
+.creditCardInfo > div {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+}
+
+.confirm {
     grid-area: confirm;
     display: flex;
     flex-direction: column;
@@ -176,14 +220,35 @@ h2 {
     gap: 20px;
 }
 
-input[type="text"]{
+.confirm > div {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    text-align: right;
+}
+
+.confirm button {
+    width: 173px;
+    height: 36px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    border: none;
+    background: #448899;
+}
+
+input[type="text"] {
     width: 200px;
     height: 38px;
     border-radius: 5px;
     padding: 10px;
-    border: 1px;
     background: #FFFFFF;
-    border: 1px solid #E8E8E8
+    border: 1px solid #E8E8E8;
 }
 
 .footer {
@@ -199,49 +264,73 @@ input[type="text"]{
     margin-top: 20px;
 }
 
-.full-height-footer {
-    grid-area: footer;
-    height: 865px;
-    display: flex;
-    align-items: first baseline;
-    justify-content: center;
-    text-align: center;
-    font-size: 1em;
+.hr1, .hr2, .hr3 {
+    grid-column: 1 / -1;
 }
 
-.hr1 { grid-area: hr1; }
-.hr2 { grid-area: hr2; }
-.hr3 { grid-area: hr3; }
-
 hr {
-    grid-area: hr;
     border: none;
     max-width: 1200px;
     border-top: 1px solid #ccc;
-    margin: 20px auto;
+    margin: 0 auto;
     width: 100%;
 }
 
-@media(max-width:1200px) and (min-width:601px){
-    .main {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+    .container {
+        grid-template-areas: 
+            "travelInfo"
+            "hr1"
+            "personInfo"
+            "hr2"
+            "creditCardInfo"
+            "hr3"
+            "confirm"
+            "footer";
+        grid-template-columns: 1fr;
     }
-    .List_spot {
-        width: 100%;
-        height: 100%;
-    }
-}
 
-@media(max-width:600px){
-    .main {
-        grid-template-columns: 1fr
-    }
-    .List_spot {
+    .travelInfo {
+        grid-template-columns: 1fr;
         width: 100%;
-        height: 100%;
+        padding: 10px;
     }
-    .search {
-        width: 285px;
-        height: 46px;
+
+    .travel-dedails {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "img"
+            "info";
+        gap: 10px;
+        margin: 10px 0;
     }
+
+    .img {
+        width: 100%;
+        height: auto;
+    }
+
+    .info {
+        width: 100%;
+    }
+
+    /* .personInfo, .creditCardInfo, .confirm {
+        width: 100%;
+        margin: 10px auto;
+        gap: 10px;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .personInfo > div, .creditCardInfo > div, .confirm > div {
+        font-size: 14px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
+
+    hr {
+        margin: 10px auto;
+    } */
 }
