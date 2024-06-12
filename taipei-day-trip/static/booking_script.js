@@ -1,7 +1,7 @@
 // JavaScript 檢查區域是否為空
 document.addEventListener("DOMContentLoaded", function() {
     // 檢查 token 並調用 getUserData
-    let token = localStorage .getItem('token');
+    let token = localStorage.getItem('token');
     if (token) {
         getUserData();
     } else {
@@ -21,17 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // }
 });
 
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     let token = localStorage .getItem('token');
-//     if(token){
-//         getUserData()
-//     }
-// });
-
 async function getUserData() { 
     try {
-        let token = localStorage .getItem('token');
+        let token = localStorage.getItem('token');
         if(!token){
             alert('請先登入會員帳戶');
             return;

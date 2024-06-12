@@ -3,6 +3,7 @@ let imageLen = 0;
 let attraction;
 let imgWrapper = document.getElementById('img-wrapper');
 let dotsWrapper = document.getElementById('dots-wrapper');
+let selectedTime = 'morning'; 
 
 function getQueryParams() {
     const path = window.location.pathname;
@@ -20,7 +21,12 @@ async function fetchAttractionDetails(id) {
     let result = await response.json();
     attraction = result;
 
-    console.log(attraction);
+    if (!response.ok) {
+        console.error('HTTP error', response.status);
+        alert(result.message);
+        return;
+    }
+    // console.log(attraction);
     // let spotPicDiv = document.getElementById('spot-image');
     // spotPicDiv.src = attraction.data.images[currentIndex];
     imageLen = attraction.data.images.length;
@@ -101,7 +107,7 @@ function nextImg() {
 }
 
 function createDots(num) {
-    console.log(num);
+    // console.log(num);
     for (let i = 0; i < num; i++) {
         const dot = document.createElement('span');
         dot.classList.add('dot');
@@ -128,9 +134,43 @@ function updatePrice(radio) {
     const priceSpan = document.getElementById('tour-price');
     if (radio.id === 'morning') {
         priceSpan.textContent = '2000';
-    } else if (radio.id === 'afternoon') {
+        selectedTime = 'morning';
+    } 
+    else{
         priceSpan.textContent = '2500';
+        selectedTime = 'afternoon';
     }
+}
+
+async function reserveTravel(){
+    let token = localStorage.getItem('token');
+    let date = document.getElementById('date').value;
+    let travelTime = selectedTime;
+    let tourPrice = document.getElementById('tour-price').innerText;
+
+    let data = {
+        attraction_id: attractionId,
+        date: date,
+        travel_time: travelTime,
+        tour_price: tourPrice
+    };
+
+    let response = await fetch('http://127.0.0.1:8000/api/booking',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+        const result = await response.json();
+        console.error('HTTP error', response.status);
+        alert(result.message);
+        return;
+    }
+
+    alert('預約成功！');
 }
 
 // // use another method
