@@ -77,18 +77,21 @@ h2 {
 }
 
 .travelInfo {
+    position: relative;
     grid-area: travelInfo;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     max-width: 1000px;
+    width: 100%;
+    margin: 20px auto; 
+    padding: 10px;
     height: auto;
     font-size: 19px;
     font-weight: 700;
     line-height: 16px;
     text-align: left;
     justify-content: left;
-    margin: 20px;
     color: #666666
 }
 
@@ -98,14 +101,14 @@ h2 {
 
 .noReservation {
     max-width: 1000px;
-    padding: 0px 10px;
+    width: 100%;
+    margin: 40px auto; 
     gap: 0px;
     justify-content: left;
     font-size: 16px;
     font-weight: 400;
     line-height: 13.3px;
     text-align: left;
-    margin: 20px;
     display: none;
 }
 
@@ -155,22 +158,23 @@ h2 {
     font-size: 19px;
     font-weight: 700;
     line-height: 16px;
-    text-align: left;
-    color: #666666
+    left: 10px;
+    color: #666666;
+    padding-left: 10px
 }
 
 .personInfo .highlight {
     font-size: 16px;
     font-weight: 700;
-    line-height: 13.3px;
+    /* line-height: 13.3px; */
     text-align: left;
 }
 
 .personInfo > div {
     font-size: 16px;
     font-weight: 400;
-    line-height: 13.3px;
     text-align: left;
+    padding-left: 10px;
     color: #666666
 }
 
@@ -180,15 +184,17 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     max-width: 1000px;
-    margin: 20px;
+    width: 100%;
+    margin: 20px auto; 
     gap: 20px;
+    text-align: left;
 }
 
 .delete-btn {
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 0; 
+    top: 70px;
     right: 0;
     cursor: pointer;
     border: none;
@@ -202,7 +208,8 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     max-width: 1000px;
-    margin: 20px;
+    width: 100%;
+    margin: 20px auto; 
     gap: 20px;
 }
 
@@ -211,6 +218,7 @@ h2 {
     font-weight: 400;
     line-height: 13.3px;
     text-align: left;
+    padding-left: 10px;
     color: #666666
 }
 
@@ -267,7 +275,16 @@ input[type="text"] {
     display: grid;
     place-items: center;
     height: 104px;
-    margin-top: 20px;
+}
+
+.full-height-footer {
+    grid-area: footer;
+    height: 865px;
+    display: flex;
+    align-items: first baseline;
+    justify-content: center;
+    text-align: center;
+    font-size: 1em;
 }
 
 .hr1, .hr2, .hr3 {
@@ -297,6 +314,7 @@ hr {
     }
 
     .travelInfo {
+        position: relative;
         grid-template-columns: 1fr;
         width: 100%;
         padding: 10px;
@@ -320,6 +338,16 @@ hr {
         width: 100%;
     }
 
+    .highlight{
+        line-height: 23.17px;
+    }
+
+    .delete-btn {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        right: 0;
+    }
     /* .personInfo, .creditCardInfo, .confirm {
         width: 100%;
         margin: 10px auto;
